@@ -1,0 +1,1 @@
+/usr/bin/cc -g   CMakeFiles/fileio.dir/fileio/lession01.c.o CMakeFiles/fileio.dir/common/fileio.c.o  -o fileio 
