@@ -1,9 +1,21 @@
 #include "common.h"
 
+void is_err(ssize_t ret, const char *opt) {
+    char buf[strlen(opt) + 5];
+    memset(buf, 0, sizeof(buf));
+
+    strcat(buf, opt);
+    strcat(buf, " err");
+
+    if (ret == -1) {
+        perror(buf);
+        exit(0);
+    }
+}
+
 int my_open(const char *pathname, int flags, ...) {
     int mode = 0;
-    if (__OPEN_NEEDS_MODE (flags))
-    {
+    if (__OPEN_NEEDS_MODE (flags)) {
         va_list arg;
         va_start (arg, flags);
         mode = va_arg (arg, int);
@@ -11,36 +23,40 @@ int my_open(const char *pathname, int flags, ...) {
     }
 
     int fd = open(pathname, flags, mode);
-    if (fd == -1) {
-       perror("open err");
-        exit(0);
-    }
+
+    is_err(fd, "open");
+
     return fd;
 }
 
 int my_close(int fd) {
     int ret = close(fd);
-    if (ret == -1) {
-        perror("close err");
-        exit(0);
-    }
+
+    is_err(ret, "close");
+
     return ret;
 }
 
-int my_read(int fd, void *buf, size_t count) {
+ssize_t my_read(int fd, void *buf, size_t count) {
     ssize_t ret = read(fd, buf, count);
-    if (ret == -1) {
-        perror("read err");
-        exit(0);
-    }
+
+    is_err(ret, "read");
+
     return ret;
 }
 
-int my_write(int fd, const void *buf, size_t count) {
+ssize_t my_write(int fd, const void *buf, size_t count) {
     ssize_t ret = write(fd, buf, count);
-    if (ret == -1) {
-        perror("write err");
-        exit(0);
-    }
+
+    is_err(ret, "write");
+
+    return ret;
+}
+
+off_t my_lseek(int fd, off_t offset, int whence) {
+    off_t ret = lseek(fd, offset, whence);
+
+    is_err(ret, "lseek");
+
     return ret;
 }

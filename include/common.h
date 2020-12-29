@@ -19,6 +19,12 @@
 
 extern int my_open(const char *pathname, int flags, ...);
 
-extern int my_read(int fd, void *buf, size_t count);
+extern int my_close(int fd);
+
+extern ssize_t my_read(int fd, void *buf, size_t count);
+
+extern ssize_t my_write(int fd, const void *buf, size_t count);
+
+extern off_t my_lseek(int fd, off_t offset, int whence);
 
 #endif //FILEIO_COMMON_H
