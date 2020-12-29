@@ -19,7 +19,7 @@ int main() {
         return 0;
     }
 
-    lseek(fd, SEEK_SET, 0);
+    lseek(fd, 0, SEEK_SET);
 
     char buf2[256] = "";
 

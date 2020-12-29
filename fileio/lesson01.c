@@ -13,7 +13,7 @@ int main() {
     char buf1[] = "hello world!";
     write(fd, buf1, strlen(buf1));
 
-    lseek(fd, SEEK_SET, 0);
+    lseek(fd, 0, SEEK_SET);
 
     char buf2[128] = "";
     read(fd, buf2, sizeof(buf2));

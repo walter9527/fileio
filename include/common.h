@@ -15,6 +15,10 @@
 
 #include <stdarg.h>
 
+#include <errno.h>
+
 extern int my_open(const char *pathname, int flags, ...);
+
+extern int my_read(int fd, void *buf, size_t count);
 
 #endif //FILEIO_COMMON_H

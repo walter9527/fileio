@@ -12,9 +12,35 @@ int my_open(const char *pathname, int flags, ...) {
 
     int fd = open(pathname, flags, mode);
     if (fd == -1) {
-        perror("open err!\n");
-        printf("程序退出!\n");
+       perror("open err");
         exit(0);
     }
     return fd;
+}
+
+int my_close(int fd) {
+    int ret = close(fd);
+    if (ret == -1) {
+        perror("close err");
+        exit(0);
+    }
+    return ret;
+}
+
+int my_read(int fd, void *buf, size_t count) {
+    ssize_t ret = read(fd, buf, count);
+    if (ret == -1) {
+        perror("read err");
+        exit(0);
+    }
+    return ret;
+}
+
+int my_write(int fd, const void *buf, size_t count) {
+    ssize_t ret = write(fd, buf, count);
+    if (ret == -1) {
+        perror("write err");
+        exit(0);
+    }
+    return ret;
 }
