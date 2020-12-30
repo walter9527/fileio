@@ -60,3 +60,19 @@ off_t my_lseek(int fd, off_t offset, int whence) {
 
     return ret;
 }
+
+int my_dup(int oldfd) {
+    int ret = dup(oldfd);
+
+    is_err(ret, "dup");
+
+    return ret;
+}
+
+int my_dup2(int oldfd, int newfd) {
+    int ret = dup2(oldfd, newfd);
+
+    is_err(ret, "dup2");
+
+    return ret;
+}
